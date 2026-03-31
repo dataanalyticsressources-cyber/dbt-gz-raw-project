@@ -3,6 +3,11 @@ version: 2
 sources:
   - name: raw
     schema: gz_raw_data
+    #loaded_at_field: "CAST(date_date AS TIMESTAMP)"
+    #freshness:
+      #warn_after:
+        #count: 90
+        #period: day
     tables:
       - name: sales
         identifier: raw_gz_sales
@@ -15,17 +20,11 @@ sources:
             tests:
               - unique
               - not_null
-
           - name: date_date
-            description: date of purchase
           - name: orders_id
-            description: foreign key to ship
           - name: pdt_id
-            description: foreign key to product
           - name: revenue
-            description: revenue = quantity * selling_price
           - name: quantity
-            description: the quantity of products purchased
 
       - name: product
         identifier: raw_gz_product
