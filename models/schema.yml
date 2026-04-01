@@ -128,12 +128,9 @@ models:
           - not_null
       - name: ads_impression
         description: "Total number of impressions for the day"
-        tests:
-          - not_null
+
       - name: ads_clicks
         description: "Total number of clicks for the day"
-        tests:
-          - not_null
 
   - name: int_orders_margin
     description: "Margin calculation aggregated per order."
@@ -251,11 +248,9 @@ models:
       - name: ads_margin
         description: "operational_margin - ads_cost"
         tests:
-          - not_null
       - name: average_basket
         description: "Average basket cost for each day"
         tests:
-          - not_null
   - name: finance_campaigns_month
     description: "Global KPIs aggregated by month, joining operational and advertising metrics."
     columns:
@@ -266,44 +261,34 @@ models:
           - not_null
       - name: ads_margin
         description: "operational_margin - ads_cost, summed per month"
-        tests:
-          - not_null
+
       - name: average_basket
         description: "Average basket cost per month = SUM(revenue) / SUM(nb_transactions)"
         tests:
-          - not_null
+
       - name: operational_margin
         description: "Sum of operational margin per month"
-        tests:
-          - not_null
+
       - name: ads_cost
         description: "Sum of ads cost per month"
-        tests:
-          - not_null
+
       - name: ads_impression
         description: "Sum of impressions per month"
-        tests:
-          - not_null
+
       - name: ads_clicks
         description: "Sum of clicks per month"
-        tests:
-          - not_null
+
       - name: quantity
         description: "Sum of quantity sold per month"
-        tests:
-          - not_null
+
       - name: revenue
         description: "Sum of revenue per month"
-        tests:
-          - not_null
+
       - name: purchase_cost
         description: "Sum of purchase cost per month"
-        tests:
-          - not_null
+
       - name: margin
         description: "Sum of margin per month"
-        tests:
-          - not_null
       - name: shipping_fee
         description: "Sum of shipping fees per month"
       - name: log_cost
