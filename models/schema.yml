@@ -3,11 +3,6 @@ version: 2
 sources:
   - name: raw
     schema: gz_raw_data
-    #loaded_at_field: "CAST(date_date AS TIMESTAMP)"
-    #freshness:
-      #warn_after:
-        #count: 90
-        #period: day
     tables:
       - name: sales
         identifier: raw_gz_sales
@@ -33,14 +28,55 @@ sources:
             tests:
               - unique
               - not_null
+
       - name: raw_adwords
-        identifier:  raw_gz_adwords
+        identifier: raw_gz_adwords
+        description: "Raw Google Adwords advertising data"
+        columns:
+          - name: date_date
+          - name: paid_source
+          - name: campaign_key
+          - name: campgn_name
+          - name: ads_cost
+          - name: impression
+          - name: click
+
       - name: raw_bing
-        identifier:  raw_gz_bing
+        identifier: raw_gz_bing
+        description: "Raw Bing advertising data"
+        columns:
+          - name: date_date
+          - name: paid_source
+          - name: campaign_key
+          - name: campgn_name
+          - name: ads_cost
+          - name: impression
+          - name: click
+
       - name: raw_criteo
-        identifier:  raw_gz_criteo
+        identifier: raw_gz_criteo
+        description: "Raw Criteo advertising data"
+        columns:
+          - name: date_date
+          - name: paid_source
+          - name: campaign_key
+          - name: campgn_name
+          - name: ads_cost
+          - name: impression
+          - name: click
+
       - name: raw_facebook
-        identifier:  raw_gz_facebook
+        identifier: raw_gz_facebook
+        description: "Raw Facebook advertising data"
+        columns:
+          - name: date_date
+          - name: paid_source
+          - name: campaign_key
+          - name: campgn_name
+          - name: ads_cost
+          - name: impression
+          - name: click
+
       - name: ship
         identifier: raw_gz_ship
         columns:
@@ -48,10 +84,35 @@ sources:
             tests:
               - unique
               - not_null
+
 models:
   # ==========================================
   # INTERMEDIATE MODELS
   # ==========================================
+
+  - name: int_campaigns
+    description: "Union of all marketing ad platform staging models (Adwords, Bing, Criteo, Facebook)."
+    columns:
+      - name: date_date
+        description: "Date of the ad"
+        tests:
+          - not_null
+      - name: paid_source
+        description: "Advertising platform source (adwords, bing, criteo, facebook)"
+        tests:
+          - not_null
+      - name: campaign_key
+        description: "Unique key of the campaign"
+        tests:
+          - not_null
+      - name: campaign_name
+        description: "Name of the campaign"
+      - name: ads_cost
+        description: "Cost of the ads, cast as float64"
+      - name: impression
+        description: "Number of impressions"
+      - name: click
+        description: "Number of clicks"
 
   - name: int_orders_margin
     description: "Margin calculation aggregated per order."
